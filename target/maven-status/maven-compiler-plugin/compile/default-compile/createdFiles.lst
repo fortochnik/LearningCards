@@ -1,0 +1,9 @@
+DataBase\DBData.class
+DataBase\DBConnection.class
+displayCardServlet.class
+Cards\Card.class
+Cards\ManagCard.class
+XMLConverter\collectionToXML.class
+DownloadServlet.class
+Upload.class
+selectCollectionPageServlet.class
