@@ -47,10 +47,8 @@ public class DownloadServlet extends HttpServlet {
 
         response.setContentType(fileType);
 
-        // Make sure to show the download dialog
         response.setHeader("Content-disposition","attachment; filename=XMLcollection.xml");
 
-        // This should send the file to browser
         OutputStream out = response.getOutputStream();
         FileInputStream in = new FileInputStream(XMLfile);
         byte[] buffer = new byte[4096];
@@ -63,7 +61,6 @@ public class DownloadServlet extends HttpServlet {
 
         XMLfile.delete();
 
-//        RequestDispatcher rd = request.getRequestDispatcher("jsp");
         RequestDispatcher rd = request.getRequestDispatcher("collection");
         rd.forward(request, response);
     }
