@@ -42,4 +42,14 @@
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
 
+<!--add card-->
+    <servlet>
+        <servlet-name>addCard</servlet-name>
+        <servlet-class>addServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addCard</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
 </web-app>

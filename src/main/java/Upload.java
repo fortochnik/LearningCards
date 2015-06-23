@@ -76,7 +76,9 @@ public class Upload extends HttpServlet {
     private void processUploadedFile(FileItem item) throws Exception {
         File uploadetFile = null;
         do{
-            String path = getServletContext().getRealPath("/upload/"+random.nextInt() + item.getName());
+            String name = new String(item.getName().getBytes(), "utf-8");
+//                    String path = getServletContext().getRealPath("/upload/" + random.nextInt() + item.getName());
+                    String path = getServletContext().getRealPath("/upload/" + random.nextInt() + name);
             uploadetFile = new File(path);
         }while(uploadetFile.exists());
 

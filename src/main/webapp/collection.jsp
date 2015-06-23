@@ -33,6 +33,10 @@
     </form>
 </form>
 
+<form action="" id="add" method="POST">
+        <br/><input type="submit" value="add card" name="addButton"/>
+</form>
+
 <h4>Upload XML data:</h4>
 <form action="upload" method="post" enctype="multipart/form-data">
 		<input name="description" type="text"><br>

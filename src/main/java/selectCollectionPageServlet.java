@@ -48,29 +48,36 @@ public class selectCollectionPageServlet extends HttpServlet {
 //            collectionToXML.collectionToXML(cardsList, nameCollection);
 //            doGet(req, resp);
 //        }
-        if(req.getParameter("downloadButton")!=null){
-            RequestDispatcher rd = req.getRequestDispatcher("download");
-            rd.forward(req, resp);
+        if(req.getParameter("addButton")!=null) {
+            resp.sendRedirect("add");
+//            resp.sendRedirect("addServlet");
         }
-        else
-        {
-            String test = "testConst";
-            HttpSession session = req.getSession(true);
-            session.setAttribute("rows", cardsList);
-            session.setAttribute("param1", nameCollection);
-            session.setAttribute("constText", test);
-        //        session.setAttribute("fromList", cardsList.get(0).getBack());
-        /*TEST*/
-            List<String> list = new ArrayList<String>();
-            list.add("stringOne");
-            list.add("stringTwo");
+        else {
 
-        //        HttpSession session = req.getSession(true);
-            session.setAttribute("listAtr", list);
+            if (req.getParameter("downloadButton") != null) {
+                RequestDispatcher rd = req.getRequestDispatcher("download");
+                rd.forward(req, resp);
+            } else {
+                String test = "testConst";
+                HttpSession session = req.getSession(true);
+                session.setAttribute("rows", cardsList);
+                session.setAttribute("nameCollection", nameCollection);
+                session.setAttribute("constText", test);
+                //        session.setAttribute("fromList", cardsList.get(0).getBack());
+        /*TEST*/
+                List<String> list = new ArrayList<String>();
+                list.add("stringOne");
+                list.add("stringTwo");
+
+                //        HttpSession session = req.getSession(true);
+                session.setAttribute("listAtr", list);
         /*TEST*/
 
-            RequestDispatcher rd = req.getRequestDispatcher("/card");
-            rd.forward(req, resp);
+                RequestDispatcher rd = req.getRequestDispatcher("/card");
+                rd.forward(req, resp);
+            }
         }
+
+
     }
 }

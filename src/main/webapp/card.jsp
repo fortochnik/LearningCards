@@ -21,10 +21,12 @@
 
 <h2>Card!</h2>
 
-<form id="back" method="POST" action="collection">
+<form id="back" method="POST">
     <input type="submit" value="back" name="backButton"/>
 
+
 </form>
+
 
 
 
@@ -50,6 +52,9 @@
 <br>BASCKET: <c:out value="${bascket}"/>
 <br>OK <c:out value="${ok}"/>
 <br>FAIL <c:out value="${fail}"/>
+
+
+<br>Collection <c:out value="${nameCollection}"/>
 
 
 

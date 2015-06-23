@@ -69,4 +69,38 @@ public class DBData {
 
         return cardsList;
     }
+
+    public boolean setCardToCollection(String collectionName, String cardFront, String cardBack) {
+        if((cardFront.length()==0) || (cardBack.length()==0)){
+            return false;
+        }
+
+        connect = DB.getConnection();
+
+        int counteOfUpdRow;
+
+        try {
+            statement = connect.createStatement();
+
+            resultSet = statement.executeQuery("SELECT id FROM listcollection.listcollection " +
+                    "WHERE nameCollection=\"" + collectionName + "\";");
+            resultSet.next();
+            String collectionId = resultSet.getString("id");
+
+            counteOfUpdRow = statement.executeUpdate("insert into listcollection.cards(Front, Back, listCollection_id) " +
+                    "values (\"" + cardFront + "\",\"" + cardBack + "\", " + collectionId + ");");
+            statement.close();
+            closeResultSet();
+            DB.closeDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+//        if counteOfUpdRow !=0 then DB wasn't update
+        if (counteOfUpdRow > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

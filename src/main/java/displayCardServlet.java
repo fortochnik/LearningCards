@@ -15,12 +15,12 @@ import java.util.List;
  */
 public class displayCardServlet  extends HttpServlet {
 
-    private static int i = -1;
-    private static int j = -1;
+    private  int i = -1;
+    private  int j = -1;
     int okValue;
     int failValue;
     int indexBascket;
-
+    String nameCollection = "";
 
 
 
@@ -34,61 +34,83 @@ public class displayCardServlet  extends HttpServlet {
 
    @Override
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//       String coll = req.getParameter("collection");
+       HttpSession session = req.getSession(true);
+//       req.setAttribute("coll", coll);
+       nameCollection = (String) session.getAttribute("nameCollection");
+       req.setAttribute("nameCollection", nameCollection);
+
        if (req.getParameter("backButton")!=null)
        {
+           i = 0;
+           j = 0;
            doGet(req, resp);
+
+
        }
-       else
-//       if(req.getParameter("buttonGetCollection")!=null)
-       {
-           String paragr = req.getParameter("collection");
-           req.setAttribute("paragr", paragr);
-           HttpSession session = req.getSession(true);
-
-           List<String> list = (List<String>) session.getAttribute("listAtr");
-           List<Card> cardsList = (List<Card>) session.getAttribute("rows");
-
-           i++;
-           j++;
+       else {
 
 
-           if(i==list.size()){
-               i=0;
-           }
-           if(j==cardsList.size()){
-               j=0;
-           }
+          /* if (req.getParameter("addButton") != null) {
+//               session.setAttribute("nameCollection", nameCollection);
 
-           if (req.getParameter("okButton")!=null){
-               okValue = cardsList.get(j).getOkValue();
-               cardsList.get(j).setOkValue(okValue + 1);
-               indexBascket = ManagCard.UpBascket(cardsList.get(j).getBasket());
-               cardsList.get(j).setBasket(indexBascket);
+               RequestDispatcher rd = req.getRequestDispatcher("/add");
+               rd.forward(req, resp);
+//               resp.sendRedirect("add");
+
 
            }
-           if (req.getParameter("failButton")!=null){
-               failValue = cardsList.get(j).getFailValue();
-               cardsList.get(j).setFailValue(failValue + 1);
-               indexBascket = ManagCard.DownBascket(cardsList.get(j).getBasket());
-               cardsList.get(j).setBasket(indexBascket);
+           else*/
+
+           {
+
+
+               List<String> list = (List<String>) session.getAttribute("listAtr");
+               List<Card> cardsList = (List<Card>) session.getAttribute("rows");
+
+
+               i++;
+               j++;
+               if (i >= list.size()) {
+                   i = 0;
+               }
+               if (j >= cardsList.size()) {
+                   j = 0;
+               }
+
+
+
+               if (req.getParameter("okButton") != null) {
+                   okValue = cardsList.get(j).getOkValue();
+                   cardsList.get(j).setOkValue(okValue + 1);
+                   indexBascket = ManagCard.UpBascket(cardsList.get(j).getBasket());
+                   cardsList.get(j).setBasket(indexBascket);
+
+               }
+               if (req.getParameter("failButton") != null) {
+                   failValue = cardsList.get(j).getFailValue();
+                   cardsList.get(j).setFailValue(failValue + 1);
+                   indexBascket = ManagCard.DownBascket(cardsList.get(j).getBasket());
+                   cardsList.get(j).setBasket(indexBascket);
+               }
+
+               req.setAttribute("bascket", cardsList.get(j).getBasket());
+               req.setAttribute("ok", cardsList.get(j).getOkValue());
+               req.setAttribute("fail", cardsList.get(j).getFailValue());
+
+               req.setAttribute("card", cardsList.get(j));
+               req.setAttribute("ind", i);
+               req.setAttribute("cardsize", cardsList.size());
+               req.setAttribute("list1", list.get(i));
+
+//               req.setAttribute("nameCollection", nameCollection);
+
+
+               req.getSession().getAttribute("constText");
+
+               RequestDispatcher rd = req.getRequestDispatcher("card.jsp");
+               rd.forward(req, resp);
            }
-
-
-
-           req.setAttribute("bascket", cardsList.get(j).getBasket());
-           req.setAttribute("ok", cardsList.get(j).getOkValue());
-           req.setAttribute("fail", cardsList.get(j).getFailValue());
-
-           req.setAttribute("card", cardsList.get(j));
-           req.setAttribute("ind", i);
-           req.setAttribute("cardsize", cardsList.size());
-           req.setAttribute("list1", list.get(i));
-
-           req.getSession().getAttribute("param1");
-           req.getSession().getAttribute("constText");
-
-           RequestDispatcher rd = req.getRequestDispatcher("card.jsp");
-           rd.forward(req, resp);
        }
 
    }
