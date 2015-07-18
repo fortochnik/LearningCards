@@ -2,7 +2,9 @@
  * Created by mipan on 08.06.2015.
  */
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -12,9 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import XMLConverter.XMLToCollection;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 
 public class Upload extends HttpServlet {
     private Random random = new Random();
@@ -57,14 +61,21 @@ public class Upload extends HttpServlet {
         try {
             List items = upload.parseRequest(request);
             Iterator iter = items.iterator();
-
+            String nameUplFile= null;
             while (iter.hasNext()) {
                 FileItem item = (FileItem) iter.next();
 
                 if (!item.isFormField()) {
-                    processUploadedFile(item);
+                    nameUplFile = processUploadedFile(item);
+
                 }
             }
+
+
+            String fullFileName = getServletContext().getRealPath("/") + "/upload/" + nameUplFile;
+            XMLToCollection.XMLToCollection(fullFileName);
+
+
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -73,17 +84,20 @@ public class Upload extends HttpServlet {
     }
 
 
-    private void processUploadedFile(FileItem item) throws Exception {
+    private String processUploadedFile(FileItem item) throws Exception {
         File uploadetFile = null;
+        String name;
+        String randomName;
         do{
-            String name = new String(item.getName().getBytes(), "utf-8");
-//                    String path = getServletContext().getRealPath("/upload/" + random.nextInt() + item.getName());
-                    String path = getServletContext().getRealPath("/upload/" + random.nextInt() + name);
+            name = new String(item.getName().getBytes(), "utf-8");
+            randomName = random.nextInt() +"";
+            String path = getServletContext().getRealPath("/upload/" + randomName + name);
             uploadetFile = new File(path);
         }while(uploadetFile.exists());
 
         uploadetFile.createNewFile();
         item.write(uploadetFile);
+        return (randomName+name);
     }
 
 }

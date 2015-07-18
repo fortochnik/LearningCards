@@ -2,6 +2,7 @@ package DataBase;
 
 import Cards.Card;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +23,8 @@ public class DBData {
     List<String> cardsFrontList = new ArrayList<String>();
     List<Card> cardsList = new ArrayList<Card>();
 
+    int counteOfUpdRow;
+
     public List<String> getListCollection(){
         connect = DB.getConnection();
         try {
@@ -40,7 +43,9 @@ public class DBData {
     }
 
     private void closeResultSet() throws SQLException {
-        resultSet.close();
+        if (resultSet!=null) {
+            resultSet.close();
+        }
     }
 
     public List<Card> getCardsCollection(String nameCollection) {
@@ -77,8 +82,6 @@ public class DBData {
 
         connect = DB.getConnection();
 
-        int counteOfUpdRow;
-
         try {
             statement = connect.createStatement();
 
@@ -101,6 +104,75 @@ public class DBData {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public boolean setCardToCollection(Card card){
+
+        connect = DB.getConnection();
+
+        try {
+            statement = connect.createStatement();
+
+            counteOfUpdRow = statement.executeUpdate("insert into listcollection.cards(Front, Back, listCollection_id, ok, fail, Basket)  values (\""
+                    + card.getFront()+ "\",\"" + card.getBack()+ "\", \"" + card.getListCollection() + "\",\"" + card.getOkValue()
+                    + "\",\" " +card.getFailValue() + "\",\"" + card.getBasket() + "\");");
+            statement.close();
+            closeResultSet();
+            DB.closeDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+//        if counteOfUpdRow !=0 then DB wasn't update
+        if (counteOfUpdRow > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public int getIdCollection(String collectionName){
+        connect = DB.getConnection();
+        String collectionId=null;
+        try {
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("SELECT id FROM listcollection.listcollection " +
+                "WHERE nameCollection=\"" + collectionName + "\";");
+        resultSet.next();
+        collectionId = resultSet.getString("id");
+
+            statement.close();
+            closeResultSet();
+            DB.closeDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return Integer.parseInt(collectionId);
+    }
+
+    public boolean createCollection(String collectionName) throws IOException {
+        connect = DB.getConnection();
+        try {
+            statement = connect.createStatement();
+            counteOfUpdRow = statement.executeUpdate("insert into listcollection.listcollection(nameCollection) " +
+                    "values (\"" + collectionName + "\");");
+
+            statement.close();
+            closeResultSet();
+            DB.closeDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            return false;
+        }
+        if (counteOfUpdRow > 0) {
+            return true;
+        } else {
+            return false;
+
         }
     }
 }
