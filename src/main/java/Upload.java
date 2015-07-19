@@ -9,29 +9,50 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import XMLConverter.XMLToCollection;
+import exceptions.XMLAddingException;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 public class Upload extends HttpServlet {
-    private Random random = new Random();
 
+    private static final String OK_RESULT = "OK! All added ok";
+    private static final String FAIL_RESULT = "FAIL! Something was wrong in adding xml to DB";
+
+
+    private Random random = new Random();
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().getAttribute("result");
+
+        RequestDispatcher rd = request.getRequestDispatcher("upload.jsp");
+        rd.forward(request, response);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String result = OK_RESULT;
+        HttpSession session = request.getSession(true);
+        session.setAttribute("result", result);
+
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (!isMultipart) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-/*
-* create folder for upload
-* */
+        /*
+        * create folder for upload
+        * */
         String pathUPLD = request.getSession().getServletContext().getRealPath("/") + "upload/";
 
         try {
@@ -73,7 +94,14 @@ public class Upload extends HttpServlet {
 
 
             String fullFileName = getServletContext().getRealPath("/") + "/upload/" + nameUplFile;
-            XMLToCollection.XMLToCollection(fullFileName);
+            try {
+                XMLToCollection.XMLToCollection(fullFileName);
+            }
+            catch (XMLAddingException e){
+                result = FAIL_RESULT;
+                session.setAttribute("result", result);
+            }
+
 
 
         } catch (Exception e) {
@@ -81,6 +109,8 @@ public class Upload extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;
         }
+
+        doGet(request,response);
     }
 
 

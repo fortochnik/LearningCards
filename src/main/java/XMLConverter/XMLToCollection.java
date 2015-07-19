@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilder;
 
 import Cards.Card;
 import DataBase.DBData;
+import exceptions.XMLAddingException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -17,7 +18,7 @@ import java.io.*;
 public class XMLToCollection {
     static DataBase.DBData DBData = new DBData();
 
-    public static boolean XMLToCollection(String fullFileName) {
+    public static boolean XMLToCollection(String fullFileName) throws XMLAddingException {
 
         try {
             File fXmlFile = new File(fullFileName);
@@ -31,7 +32,16 @@ public class XMLToCollection {
             Element elementNameCollection = (Element) NodeNameCollection;
             String nameCollection = elementNameCollection.getAttribute("collection");
 
-            DBData.createCollection(nameCollection);
+            if (!nameCollection.equals(""))
+            {
+                DBData.createCollection(nameCollection);
+
+            }
+            else
+            {
+                throw new XMLAddingException();
+            }
+
             int idCollection = DBData.getIdCollection(nameCollection);
 
             NodeList nList = doc.getElementsByTagName("card");
@@ -56,7 +66,8 @@ public class XMLToCollection {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            throw new XMLAddingException();
+//            return false;
         }
         return true;
     }

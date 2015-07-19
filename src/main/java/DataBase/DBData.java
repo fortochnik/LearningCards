@@ -1,6 +1,7 @@
 package DataBase;
 
 import Cards.Card;
+import exceptions.XMLAddingException;
 
 import java.io.*;
 import java.sql.Connection;
@@ -107,7 +108,7 @@ public class DBData {
         }
     }
 
-    public boolean setCardToCollection(Card card){
+    public boolean setCardToCollection(Card card) throws XMLAddingException {
 
         connect = DB.getConnection();
 
@@ -122,13 +123,19 @@ public class DBData {
             DB.closeDBConnection();
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+//          todo delete added collection
+            throw new XMLAddingException();
+
+
+//            return false;
         }
 //        if counteOfUpdRow !=0 then DB wasn't update
         if (counteOfUpdRow > 0) {
             return true;
         } else {
-            return false;
+//          todo delete added collection
+            throw new XMLAddingException();
+//            return false;
         }
 
     }
@@ -153,7 +160,7 @@ public class DBData {
         return Integer.parseInt(collectionId);
     }
 
-    public boolean createCollection(String collectionName) throws IOException {
+    public boolean createCollection(String collectionName) throws IOException, XMLAddingException {
         connect = DB.getConnection();
         try {
             statement = connect.createStatement();
@@ -165,13 +172,14 @@ public class DBData {
             DB.closeDBConnection();
         } catch (SQLException e) {
             e.printStackTrace();
-
-            return false;
+            throw new XMLAddingException();
+//            return false;
         }
         if (counteOfUpdRow > 0) {
             return true;
         } else {
-            return false;
+            throw new XMLAddingException();
+//            return false;
 
         }
     }
