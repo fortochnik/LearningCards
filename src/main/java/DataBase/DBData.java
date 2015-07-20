@@ -183,4 +183,30 @@ public class DBData {
 
         }
     }
+    /*it's strange and bad way for it. I know*/
+    public boolean deleteCollection (int idCollection) throws XMLAddingException {
+        connect = DB.getConnection();
+        try {
+            statement = connect.createStatement();
+            counteOfUpdRow = statement.executeUpdate("delete from listcollection.cards WHERE listCollection_id=" + idCollection + ";");
+            counteOfUpdRow = statement.executeUpdate("delete from listcollection.listcollection WHERE id=" + idCollection + ";");
+
+            statement.close();
+            closeResultSet();
+            DB.closeDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new XMLAddingException();
+//            return false;
+        }
+        if (counteOfUpdRow > 0) {
+            return true;
+        } else {
+            throw new XMLAddingException();
+//            return false;
+
+        }
+//        return true;
+    }
+
 }

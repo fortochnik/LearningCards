@@ -19,7 +19,7 @@ public class XMLToCollection {
     static DataBase.DBData DBData = new DBData();
 
     public static boolean XMLToCollection(String fullFileName) throws XMLAddingException {
-
+        int idCollection = -1;
         try {
             File fXmlFile = new File(fullFileName);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -42,7 +42,7 @@ public class XMLToCollection {
                 throw new XMLAddingException();
             }
 
-            int idCollection = DBData.getIdCollection(nameCollection);
+            idCollection = DBData.getIdCollection(nameCollection);
 
             NodeList nList = doc.getElementsByTagName("card");
 
@@ -57,8 +57,6 @@ public class XMLToCollection {
                     String bascket = eElement.getElementsByTagName("basket").item(0).getTextContent();
                     String okValue = eElement.getElementsByTagName("ok").item(0).getTextContent();
                     String failValue = eElement.getElementsByTagName("fail").item(0).getTextContent();
-
-
                     Card card = new Card(front, back, Integer.parseInt(bascket), Integer.parseInt(okValue), Integer.parseInt(failValue), idCollection );
                     DBData.setCardToCollection(card);
                 }
@@ -66,6 +64,7 @@ public class XMLToCollection {
 
         } catch (Exception e) {
             e.printStackTrace();
+            DBData.deleteCollection(idCollection);
             throw new XMLAddingException();
 //            return false;
         }
