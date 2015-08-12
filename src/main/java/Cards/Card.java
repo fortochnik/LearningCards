@@ -2,20 +2,32 @@ package Cards;/**
  * Created by mipan on 02.05.2015.
  */
 public class Card {
-    public String front = null;
-    public String back = null;
-    public int bascket = 0;
-    public int okValue = 0;
-    public int failValue = 0;
-    public int listCollection = 0;
+    private String front = null;
+    private String back = null;
+    private int basket = 0;
+    private int okValue = 0;
+    private int failValue = 0;
+    private int listCollection = 0;
 
-    public Card(String front, String back, int bascket, int okValue, int failValue, int listCollection) {
+    private int idCardInDB = 0;
+
+
+    public Card(String front, String back, int basket, int okValue, int failValue, int listCollection) {
         this.back = back;
         this.front = front;
-        this.bascket = bascket;
+        this.basket = basket;
         this.okValue = okValue;
         this.failValue = failValue;
         this.listCollection = listCollection;
+    }
+    public Card(String front, String back, int basket, int okValue, int failValue, int listCollection, int idCardInDB) {
+        this.back = back;
+        this.front = front;
+        this.basket = basket;
+        this.okValue = okValue;
+        this.failValue = failValue;
+        this.listCollection = listCollection;
+        this.idCardInDB = idCardInDB;
     }
 
     public Card() {
@@ -31,11 +43,11 @@ public class Card {
     }
 
     public int getBasket() {
-        return bascket;
+        return basket;
     }
 
-    public void setBasket(int bascket) {
-        this.bascket = bascket;
+    public void setBasket(int basket) {
+        this.basket = basket;
     }
 
     public int getFailValue() {
@@ -68,5 +80,14 @@ public class Card {
 
     public void setOkValue(int okValue) {
         this.okValue = okValue;
+    }
+
+
+    public int getIdCardInDB() {
+        return idCardInDB;
+    }
+
+    public void setIdCardInDB(int idCardInDB) {
+        this.idCardInDB = idCardInDB;
     }
 }

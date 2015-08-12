@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,17 +23,30 @@ import java.util.List;
 public class selectCollectionPageServlet extends HttpServlet {
     DBData DBData = new DBData();
 
-    List<String> dataList = new ArrayList<String>();
 
-    List<Card> cardsList =null;
+//    List<Card> cardsListFirstBasket = null;
+//    List<Card> cardsListSecondBasket = null;
+//    List<Card> cardsListThirdBasket = null;
+//    List<List<Card>> listOfCollections = new ArrayList<List<Card>>();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException
     {
-        if (cardsList != null){
-            cardsList.clear();
-        }
-        dataList.clear();
+//        dataList.clear();
+//        if (cardsListFirstBasket != null) {
+//            cardsListFirstBasket.clear();
+//        }
+//        if (cardsListSecondBasket != null) {
+//            cardsListSecondBasket.clear();
+//        }
+//        if (cardsListThirdBasket != null) {
+//            cardsListThirdBasket.clear();
+//        }
+//        if(listOfCollections != null){
+//            listOfCollections.clear();
+//        }
+        List<String> dataList = new ArrayList<String>();
+
         dataList = DBData.getListCollection();
         request.setAttribute("rows", dataList);
         RequestDispatcher rd = request.getRequestDispatcher("collection.jsp");
@@ -43,38 +58,38 @@ public class selectCollectionPageServlet extends HttpServlet {
             throws ServletException, IOException
     {
         String nameCollection = req.getParameter("collection");
-        cardsList = DBData.getCardsCollection(nameCollection);
-//        if (req.getParameter("download")!=null){
-//            collectionToXML.collectionToXML(cardsList, nameCollection);
-//            doGet(req, resp);
-//        }
+
         if(req.getParameter("addButton")!=null) {
             resp.sendRedirect("add");
-//            resp.sendRedirect("addServlet");
         }
         else {
+            if (req.getParameter("deleteButton") != null) {
+                resp.sendRedirect("delete");
+            }
+            else
+            {
+                if (req.getParameter("downloadButton") != null) {
+                    RequestDispatcher rd = req.getRequestDispatcher("download");
+                    rd.forward(req, resp);
+                }
+                else
+                {
+                    //                String test = "testConst";
+                    //                HttpSession session = req.getSession(true);
+                    int idCollection = DBData.getIdCollection(nameCollection);
+                    /*
+                    set id_collection and zero in Basket into DB.
+                    */
+                    if (nameCollection != null) {
+                        DBData.setDisplayCollection(idCollection);
+                    }
 
-            if (req.getParameter("downloadButton") != null) {
-                RequestDispatcher rd = req.getRequestDispatcher("download");
-                rd.forward(req, resp);
-            } else {
-                String test = "testConst";
-                HttpSession session = req.getSession(true);
-                session.setAttribute("rows", cardsList);
-                session.setAttribute("nameCollection", nameCollection);
-                session.setAttribute("constText", test);
-                //        session.setAttribute("fromList", cardsList.get(0).getBack());
-        /*TEST*/
-                List<String> list = new ArrayList<String>();
-                list.add("stringOne");
-                list.add("stringTwo");
+                    //                session.setAttribute("nameCollection", nameCollection);
 
-                //        HttpSession session = req.getSession(true);
-                session.setAttribute("listAtr", list);
-        /*TEST*/
 
-                RequestDispatcher rd = req.getRequestDispatcher("/card");
-                rd.forward(req, resp);
+                    RequestDispatcher rd = req.getRequestDispatcher("/card");
+                    rd.forward(req, resp);
+                }
             }
         }
 

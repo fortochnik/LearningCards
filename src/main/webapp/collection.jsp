@@ -31,6 +31,9 @@
     <form method="POST" action="">
         <input type="submit" value="download" name="downloadButton" />
     </form>
+    <form action="" id="delete" method="POST" >
+        <input type="submit" value="delete" name="deleteButton" />
+    </form>
 </form>
 
 <form action="" id="add" method="POST">
@@ -39,7 +42,6 @@
 
 <h4>Upload XML data:</h4>
 <form action="upload" method="post" enctype="multipart/form-data">
-		<input name="description" type="text"><br>
 		<input name="data" type="file"><br>
 		<input type="submit"><br>
 </form>

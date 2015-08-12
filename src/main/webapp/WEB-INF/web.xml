@@ -52,6 +52,15 @@
         <servlet-name>addCard</servlet-name>
         <url-pattern>/add</url-pattern>
     </servlet-mapping>
+<!--delete card-->
+    <servlet>
+        <servlet-name>deleteCard</servlet-name>
+        <servlet-class>deleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteCard</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
 
 
     <error-page>

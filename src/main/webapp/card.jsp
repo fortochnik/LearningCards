@@ -28,9 +28,6 @@
 </form>
 
 
-
-
-
 <option><c:out value="${card.front}"/></option>
 <br>----
 
@@ -49,29 +46,12 @@
     </form>
 </div>
 
-<br>BASCKET: <c:out value="${bascket}"/>
-<br>OK <c:out value="${ok}"/>
-<br>FAIL <c:out value="${fail}"/>
+
+<br>Statistic:
+<br>OK: <c:out value="${card.okValue}"/>
+<br>FAIL: <c:out value="${card.failValue}"/>
 
 
-<br>Collection <c:out value="${nameCollection}"/>
-
-
-
-
-<%--
-     <p>test
-     <br><c:out value="${list1}"/> - test
-
-    <c:forEach var="row" items="${rows}">
-
-       <option><c:out value="${row.front}"/></option>
-       ----
-       <option><c:out value="${row.back}"/></option>
-     </c:forEach>
-
-
---%>
 
 </form>
 </body>
