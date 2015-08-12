@@ -11,6 +11,6 @@ All terms have a statistics of success and failure. Cards are placed in the bask
 
 TO DO:
 * [x] ~~Create a web form to add cards in the existing collections~~;
-* [ ] Save statistics and ~~uploaded XML into the DB~~; (=
+* [ ] ~~Save statistics~~ and ~~uploaded XML into the DB~~; (=
 * [ ] UI;
 * [ ] More Unit tests.
