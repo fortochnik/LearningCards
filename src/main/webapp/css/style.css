@@ -1,0 +1,71 @@
+BODY
+{
+	background-color: rgba(218, 157, 127, 0.737);
+	height: 133px;
+	width: ;
+}
+.main
+{
+	/*+placement: 19px 11px;*/
+	position: relative;
+	left: 19px;
+	top: 11px;
+}
+.main .cardSide
+{
+	width: 312px;
+	border: 1px outset rgba(46, 19, 6, 0.274);
+	/*+border-radius: 2px;*/
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+	text-align: left;
+	color: rgba(15, 36, 64, 0.761);
+	height: 74px;
+	padding-bottom: 5px;
+	padding: 13px;
+	font-weight: bold;
+}
+.front
+{
+	text-align: center;
+	padding-right: 0;
+	padding: 28px;
+	font-weight: normal;
+}
+H2
+{
+	color: rgba(25, 93, 127, 0.828);
+	font-weight: bold;
+}
+INPUT
+{
+	margin-top: 3px;
+	padding: 6px 8px;
+	/*+border-radius: 10px;*/
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+}
+SPAN .part2
+{
+	width: 312px;
+	border: 1px outset rgba(46, 19, 6, 0.274);
+	/*+border-radius: 2px;*/
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+	text-align: left;
+	color: rgba(15, 36, 64, 0.761);
+	height: 74px;
+	padding-bottom: 5px;
+	padding: 13px;
+	font-weight: bold;
+}
+.cardSide
+{
+	width: 301px;
+}

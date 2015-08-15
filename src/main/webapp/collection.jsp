@@ -11,8 +11,11 @@
 
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+  <link href="css/style.css" rel="stylesheet">
+</head>
 <body>
+<div class="main">
 <h2>Welcome!</h2>
 
 <form id="test" method="POST" action="">
@@ -46,6 +49,6 @@
 		<input type="submit"><br>
 </form>
 
-
+</div>
 </body>
 </html>

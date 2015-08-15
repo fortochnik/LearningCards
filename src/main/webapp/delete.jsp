@@ -1,11 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <HTML>
-    <HEAD>
-        <TITLE>Submitting Text Areas</TITLE>
+    <head>
+          <link href="css/style.css" rel="stylesheet">
+          <TITLE>Submitting Text Areas</TITLE>
     </HEAD>
 
     <BODY>
+    <div class="main">
         <H1>delete <c:out value="${coll}"/> collection</H1>
         <form action="" method="post">
            <select name="collection">
@@ -27,5 +29,6 @@
         <form id="back" method="POST" action="collection">
             <input type="submit" value="back" name="backButton"/>
         </form>
+        </div>
     </BODY>
 <HTML>
