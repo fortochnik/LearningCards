@@ -373,8 +373,9 @@ public class DBData {
             e.printStackTrace();
         }
 
-
-
+        if(card.getBack().length()>100){
+            card = ManagCard.updateBackForDisplay(card);
+        }
         return card;
     }
 

@@ -13,7 +13,7 @@ BODY
 }
 .main .cardSide
 {
-	width: 312px;
+	width: 500px;
 	border: 1px outset rgba(46, 19, 6, 0.274);
 	/*+border-radius: 2px;*/
 	-moz-border-radius: 2px;
@@ -22,7 +22,7 @@ BODY
 	border-radius: 2px;
 	text-align: left;
 	color: rgba(15, 36, 64, 0.761);
-	height: 74px;
+	height: 100px;
 	padding-bottom: 5px;
 	padding: 13px;
 	font-weight: bold;
@@ -64,8 +64,4 @@ SPAN .part2
 	padding-bottom: 5px;
 	padding: 13px;
 	font-weight: bold;
-}
-.cardSide
-{
-	width: 301px;
 }
