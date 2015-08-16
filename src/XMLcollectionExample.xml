@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionary collection="English">
+  <card id="0">
+    <front>gasp</front>
+    <back>to make a noise by suddenly breathing in because you are shocked or surprised</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="1">
+    <front>polite</front>
+    <back>behaving in a way that is not rude and shows that you think about other people</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="2">
+    <front>rude</front>
+    <back>behaving in a way that is not polite and upsets other people</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="3">
+    <front>waiter</front>
+    <back>a man who works in a restaurant, bringing food to customers</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="4">
+    <front>restaurant</front>
+    <back>a place where you can buy and eat a meal</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="5">
+    <front>eat</front>
+    <back>to put food into your mouth and then swallow it</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="6">
+    <front>mouth</front>
+    <back>the part of the face that is used for eating and speaking</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="7">
+    <front>entrance</front>
+    <back>a door or other opening that you use to go in somewhere</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="8">
+    <front>organization</front>
+    <back>a group of people who work together for the same purpose</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="9">
+    <front>purpose</front>
+    <back>why you do something or why something exists</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="10">
+    <front>want</front>
+    <back>to feel that you would like to have something</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="11">
+    <front>cream</front>
+    <back>a thick, white liquid that is taken from milk</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="12">
+    <front>colour</front>
+    <back>red, blue, green, yellow, etc.</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="13">
+    <front>skin</front>
+    <back>the outer layer of a person or animal’s body</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="14">
+    <front>fruit</front>
+    <back>things such as apples or oranges that grow on a tree or a bush, contain seeds, and can be eaten as food</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="15">
+    <front>berry</front>
+    <back>a small, round fruit on some plants and trees</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="16">
+    <front>small</front>
+    <back>little in size or amount</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="17">
+    <front>young</front>
+    <back>having lived or existed for only a short time and not old</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="18">
+    <front>time</front>
+    <back>a particular point in the day or night</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="19">
+    <front>occasion</front>
+    <back>an important event</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+  <card id="20">
+    <front>important</front>
+    <back>valuable, useful, or necessary</back>
+    <basket>1</basket>
+    <ok>0</ok>
+    <fail>0</fail>
+  </card>
+</dictionary>
+

@@ -14,3 +14,8 @@ TO DO:
 * [x] ~~Save statistics~~ and ~~uploaded XML into the DB~~; (=
 * [x] ~~UI~~;
 * [ ] More Unit tests.
+
+
+For use:
+You can use "mysql_collection_schema.sql" for create DB.
+And add example data from "XMLcollectionExample.xml".

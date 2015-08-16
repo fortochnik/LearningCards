@@ -404,4 +404,73 @@ public class DBData {
             e.printStackTrace();
         }
     }
+
+    public void setIdCardInDB(int idCardInDB) {
+        connect = DB.getConnection();
+
+
+        try {
+            statement = connect.createStatement();
+
+            statement.executeUpdate("update listcollection.display_of_collection set lastCard= " + idCardInDB + " where id=1");
+
+
+            statement.close();
+            closeResultSet();
+            DB.closeDBConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getIdCardInDB() {
+        int idCardinDB=0;
+        connect = DB.getConnection();
+
+
+        try {
+            statement = connect.createStatement();
+
+            resultSet = statement.executeQuery("select lastCard from listcollection.display_of_collection where id=1");
+            resultSet.next();
+            idCardinDB = resultSet.getInt("lastCard");
+
+            statement.close();
+            closeResultSet();
+            DB.closeDBConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idCardinDB;
+    }
+
+    public Card getCardByID(int idCardinDB) {
+        Card card = new Card();
+        connect = DB.getConnection();
+        try {
+            statement = connect.createStatement();
+
+            resultSet = statement.executeQuery("SELECT * FROM listcollection.cards where id=" + idCardinDB);
+            resultSet.next();
+
+
+            card.setFront(resultSet.getString("Front"));
+            card.setBack(resultSet.getString("Back"));
+            card.setBasket(resultSet.getInt("Basket"));
+            card.setOkValue(resultSet.getInt("ok"));
+            card.setFailValue(resultSet.getInt("fail"));
+            card.setListCollection(resultSet.getInt("listCollection_id"));
+
+
+
+            closeResultSet();
+            DB.closeDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return card;
+    }
 }

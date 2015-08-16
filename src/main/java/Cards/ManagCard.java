@@ -14,17 +14,17 @@ public class ManagCard {
     private static final int MAX = 3;
     private static final int MIN = 1;
 
-    public static int UpBasket(int indexBascket){
-        if (indexBascket<MAX){
-            indexBascket++;
+    public static int UpBasket(int indexBasket){
+        if (indexBasket<MAX){
+            indexBasket++;
         }
-        return indexBascket;
+        return indexBasket;
     }
-    public static int DownBasket(int indexBascket){
-        if (indexBascket>MIN){
-            indexBascket--;
+    public static int DownBasket(int indexBasket){
+        if (indexBasket>MIN){
+            indexBasket--;
         }
-        return indexBascket;
+        return indexBasket;
     }
 
 
@@ -77,7 +77,7 @@ public class ManagCard {
 
         int length = (int)Math.abs(back.length() / lengthCoefficient);//back.length()/100;
         for (int i = 1; i <= length; i++) {
-            int indOfSpace = back.indexOf(" ", i*lengthCoefficient - (6 + lengthAddSubTag*i));
+            int indOfSpace = back.indexOf(" ", i*lengthCoefficient - (10 + lengthAddSubTag*i));
             String subBack = back.substring(0, indOfSpace) + "<br>" + back.substring(indOfSpace+1);
             back = subBack;
         }

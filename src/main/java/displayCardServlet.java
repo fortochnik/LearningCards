@@ -17,7 +17,7 @@ import java.io.IOException;
 public class displayCardServlet  extends HttpServlet {
     int okValue;
     int failValue;
-    int indexBasket;
+
     DBData DBData = new DBData();
     ManagCard ManagCard = new ManagCard();
 
@@ -41,34 +41,38 @@ public class displayCardServlet  extends HttpServlet {
            Card card = DBData.getCardForDisplay();
            req.setAttribute("card", card);
 
-           try
-           {
-               File file = new File("D:\\testCard.txt");
-               FileWriter fileWriter = new FileWriter(file);
-               fileWriter.write("Front=" + card.getFront() + ";___ \n ");
-               fileWriter.write("IdCardInDB=" + card.getIdCardInDB() + ";___ \n");
-               fileWriter.write("Basket=" + card.getBasket() + "; ");
-               fileWriter.close();
+           if(req.getParameter("collection") != null){
+               DBData.setIdCardInDB(card.getIdCardInDB());
            }
-           catch (Exception e1) {	}
+
+           int idCardinDB;
            if (req.getParameter("okButton") != null) {
+               int newBasket;
+               idCardinDB = DBData.getIdCardInDB();
+               Card updCard = DBData.getCardByID(idCardinDB);
 
-               okValue = card.getOkValue();
-               card.setOkValue(okValue + 1);
-               indexBasket = ManagCard.UpBasket(card.getBasket());
-               card.setBasket(indexBasket);
+               int OldBasket = updCard.getBasket();
+               int okValue = updCard.getOkValue() + 1;
 
-               ManagCard.setBasketAndStatistic(card.getIdCardInDB(), indexBasket, card.getOkValue(), true);
+               newBasket = ManagCard.UpBasket(updCard.getBasket());
+
+               ManagCard.setBasketAndStatistic(idCardinDB, newBasket, okValue, true);
 
            }
            if (req.getParameter("failButton") != null) {
-               failValue = card.getFailValue();
-               card.setFailValue(failValue + 1);
-               indexBasket = ManagCard.DownBasket(card.getBasket());
-               card.setBasket(indexBasket);
+               int newBasket;
 
-               ManagCard.setBasketAndStatistic(card.getIdCardInDB(), card.getBasket(), card.getFailValue(), false);
+               idCardinDB = DBData.getIdCardInDB();
+               Card updCard = DBData.getCardByID(idCardinDB);
+
+               int OldBasket = updCard.getBasket();
+               int failValue = updCard.getFailValue() + 1;
+
+               updCard.setFailValue(failValue + 1);
+               newBasket = ManagCard.DownBasket(updCard.getBasket());
+               ManagCard.setBasketAndStatistic(idCardinDB, newBasket, failValue, false);
            }
+           DBData.setIdCardInDB(card.getIdCardInDB());
 
            RequestDispatcher rd = req.getRequestDispatcher("card.jsp");
            rd.forward(req, resp);
