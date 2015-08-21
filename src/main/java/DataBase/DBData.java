@@ -251,35 +251,44 @@ public class DBData {
     }
 
 
-    public boolean setDisplayCollection(int idCollection) {
+    public boolean setDisplayCollection(int idCollection)
+    {
         connect = DB.getConnection();
         int  countOfUpdRow;
-        try {
-            statement = connect.createStatement();
-            resultSet = statement.executeQuery("select * from listcollection.display_of_collection");
 
-            if (!resultSet.next()){
-                countOfUpdRow = statement.executeUpdate("insert into  listcollection.display_of_collection(id_collection, basketFirstCount, basketSecondCount) values (" + idCollection + ", 0, 0);");
+
+
+            try {
+                statement = connect.createStatement();
+                resultSet = statement.executeQuery("select * from listcollection.display_of_collection");
+
+                if (!resultSet.next()){
+
+                    countOfUpdRow = statement.executeUpdate("insert into  listcollection.display_of_collection(id_collection, basketFirstCount, basketSecondCount) values (" + idCollection + ", 0, 0);");
+
+                }
+                else{
+                    countOfUpdRow = statement.executeUpdate("update listcollection.display_of_collection set basketFirstCount=0, basketSecondCount=0, id_collection = " + idCollection + " where id=1");
+
+                }
+
+
+                statement.close();
+                closeResultSet();
+                DB.closeDBConnection();
+            } catch (SQLException e) {
+
+
+                return false;
             }
-            else{
-                countOfUpdRow = statement.executeUpdate("update listcollection.display_of_collection set basketFirstCount=0, basketSecondCount=0, id_collection = " + idCollection + " where id=1");
+
+            if (countOfUpdRow > 0) {
+                return true;
+            } else {
+                return false;
             }
-
-
-            statement.close();
-            closeResultSet();
-            DB.closeDBConnection();
-        } catch (SQLException e) {
-
-            return false;
-        }
-        if (countOfUpdRow > 0) {
-            return true;
-        } else {
-            return false;
-        }
-
     }
+
 
 
     public Card getCardForDisplay() {
@@ -347,6 +356,8 @@ public class DBData {
 
         }
 
+
+
         Card card = new Card();
         try {
             resultSet = statement.executeQuery("select * from listcollection.cards WHERE listCollection_id= "+ idCollection +" and Basket= "+ numberOfBasket);
@@ -381,7 +392,9 @@ public class DBData {
 
     public void setBasketAndStatistic(int idCardInDB, int indexBasket, int statistic, boolean kindOfStatistic) {
         connect = DB.getConnection();
-        
+
+
+
         String typeOfStatisticForSQLQuery;
 
         if (kindOfStatistic){
@@ -393,7 +406,9 @@ public class DBData {
         try {
             statement = connect.createStatement();
 
+
             statement.executeUpdate("update listcollection.cards set Basket="+ indexBasket +", " + typeOfStatisticForSQLQuery + "=" + statistic + " where id=" + idCardInDB);
+
 
 
             statement.close();
@@ -403,6 +418,7 @@ public class DBData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public void setIdCardInDB(int idCardInDB) {
@@ -412,7 +428,7 @@ public class DBData {
         try {
             statement = connect.createStatement();
 
-            statement.executeUpdate("update listcollection.display_of_collection set lastCard= " + idCardInDB + " where id=1");
+            statement.executeUpdate("update listcollection.display_of_collection set lastCard= " + idCardInDB);
 
 
             statement.close();
@@ -432,7 +448,7 @@ public class DBData {
         try {
             statement = connect.createStatement();
 
-            resultSet = statement.executeQuery("select lastCard from listcollection.display_of_collection where id=1");
+            resultSet = statement.executeQuery("select lastCard from listcollection.display_of_collection");
             resultSet.next();
             idCardinDB = resultSet.getInt("lastCard");
 
